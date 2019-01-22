@@ -1,5 +1,10 @@
 $(function() {
-  $("#datepicker").datepicker();
+  $("#datepicker").datepicker({
+    dateFormat: 'DD',
+    changeMonth: true,
+    changeDay: true
+  });
+
 });
 $(function() {
   var departure = [

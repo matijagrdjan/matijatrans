@@ -42,25 +42,25 @@
 
         <h1 class="cover-heading">MatijaTrans</h1>
         <p>Vozimo samo na relaciji Zagreb - Vrbovec i Zagreb - Bjelovar</p>
-        <form th:action="@{/post/}" th:object="${stationsTemplate}" method="POST">
+        <form th:action="@{/post}" th:object="${stationsTemplate}" method="POST">
         <p class="lead">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text"><img class="bus-picture" src="images/bus.png" alt=""></span>
             </div>
-            <input  type="text" class="form-control" placeholder="Mjesto polaska" id="departure" th:filed="*{firstStation}">
-            <span class="validationError" th:if="${#fields.hasErrors('firstStation')}" th:errors="*{firstStation}">first station Error</span>
+            <input  type="text" class="form-control" placeholder="Mjesto polaska" id="departure" th:field="*{firstStation}">
+
 
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <span class="input-group-text"><img class="bus-picture" src="images/bus-2.png" alt=""></span>
             </div>
-            <input type="text" class="form-control" placeholder="Odrediste" id="arrive" th:filed="*{lastStation}">
-            <span class="validationError" th:if="${#fields.hasErrors('lastStation')}" th:errors="*{lastStation}">last station Error</span>
+            <input type="text" class="form-control" placeholder="Odrediste" id="arrive" th:field="*{lastStation}">
+
         </div>
-        <img class="calendar" src="images/calendar.png" alt=""><input type="text" class="btn btn-lg btn-secondary" id="datepicker" placeholder="Odaberi datum polaska"  >
-     <span class="validationError" th:if="${#fields.hasErrors('tripDate')}" th:errors="*{tripDate}">date Error</span>
+        <img class="calendar" src="images/calendar.png" alt=""><input type="text" class="btn btn-lg btn-secondary" id="datepicker" placeholder="Odaberi datum polaska" th:field="*{tripDate} ">
+
         <button class="btn btn-lg btn-secondary" type="submit">Provjeri</button>
         </form>
         </p>
@@ -84,7 +84,7 @@
             <td th:text="${trip.departureTime}" >14:00 h</td>
             <td th:text="${trip.arrivalTime}"  >14:30 h</td>
             <th scope="col"><img class="money" src="images/get-money.png" alt=""></th>
-            <td>00:30 h</td>
+            <td>01:00 h</td>
         </tr>
         </tbody>
     </table>

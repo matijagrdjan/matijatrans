@@ -16,10 +16,7 @@ public class LineService {
     public List<Trip> getlinebyfirstStationAndLastStation(String firstStation, String lastStation){
 //        return lineRepository.findAllByFirstStationNameAndLastStationName(firstStation, lastStation).get(0).getTrips();
 
-        if(firstStation == null){
-            return lineRepository.findByFirstStationNameAndLastStationName("zagreb", "karlovac").getTrips();
-        }else {
-        return lineRepository.findByFirstStationNameAndLastStationName(firstStation, lastStation).getTrips();}
+        return lineRepository.findByFirstStationNameAndLastStationName(firstStation, lastStation).getTrips();
 
     }
 }

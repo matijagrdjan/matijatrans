@@ -1,13 +1,15 @@
 package com.example.matijatrans.controller;
 
 import com.example.matijatrans.service.LineService;
+import com.example.matijatrans.templeteObjects.Greske;
 import com.example.matijatrans.templeteObjects.StationsTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Slf4j
@@ -15,14 +17,15 @@ import org.springframework.web.bind.annotation.*;
 public class IndexController {
 
 
-
-
     @Autowired
     public LineService lineService;
 
 
+    public Greske greske;
+
+
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(Model model){
+    public String getIndexPage(Model model) {
         model.addAttribute("stationsTemplate", new StationsTemplate());
 
 
@@ -31,28 +34,22 @@ public class IndexController {
     }
 
 
+    @PostMapping(value = "post")
+    public String postStations(@ModelAttribute StationsTemplate stationsTemplate, Model model) {
 
-    @RequestMapping(value = "post")
-    public String postStations(@ModelAttribute StationsTemplate stationsTemplate, Model model, Errors errors){
+        try {
+            model.addAttribute("trips", lineService.getlinebyfirstStationAndLastStation(
+                    stationsTemplate.getFirstStation().toUpperCase(), stationsTemplate.getLastStation().toUpperCase()));
 
-        if(errors.hasErrors()){
+            return "index";
+
+        } catch (Exception e) {
+
             return "index";
         }
 
-        model.addAttribute("trips", lineService.getlinebyfirstStationAndLastStation( stationsTemplate.getFirstStation(), stationsTemplate.getLastStation()));
-
-        return "index";
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }

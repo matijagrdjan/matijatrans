@@ -18,6 +18,8 @@ public class Trip {
 
     private String departureTime;
 
+    private String tripLength;
+
     @ManyToOne
     private Line line;
 
