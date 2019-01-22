@@ -10,11 +10,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Stops{
+public class Stations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    public String stopName;
+
+    public String name;
 
 
 }

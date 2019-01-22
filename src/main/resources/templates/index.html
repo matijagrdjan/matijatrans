@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MatijaTrans</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/jQuery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="cover.css" rel="stylesheet">
+
+
+</head>
+
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">MatijaTrans</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="#">Vozni Red</a>
+                <a class="nav-link" href="#">O nama</a>
+                <a class="nav-link" href="#">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" class="inner cover ui-widget">
+
+
+        <h1 class="cover-heading">MatijaTrans</h1>
+        <p>Vozimo samo na relaciji Zagreb - Vrbovec i Zagreb - Bjelovar</p>
+        <form th:action="@{/post/}" th:object="${stationsTemplate}" method="POST">
+        <p class="lead">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><img class="bus-picture" src="images/bus.png" alt=""></span>
+            </div>
+            <input  type="text" class="form-control" placeholder="Mjesto polaska" id="departure" th:filed="*{firstStation}">
+            <span class="validationError" th:if="${#fields.hasErrors('firstStation')}" th:errors="*{firstStation}">first station Error</span>
+
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><img class="bus-picture" src="images/bus-2.png" alt=""></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Odrediste" id="arrive" th:filed="*{lastStation}">
+            <span class="validationError" th:if="${#fields.hasErrors('lastStation')}" th:errors="*{lastStation}">last station Error</span>
+        </div>
+        <img class="calendar" src="images/calendar.png" alt=""><input type="text" class="btn btn-lg btn-secondary" id="datepicker" placeholder="Odaberi datum polaska"  >
+     <span class="validationError" th:if="${#fields.hasErrors('tripDate')}" th:errors="*{tripDate}">date Error</span>
+        <button class="btn btn-lg btn-secondary" type="submit">Provjeri</button>
+        </form>
+        </p>
+
+    </main>
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col">Broj Linije</th>
+            <th scope="col"></th>
+            <th scope="col">Vrijeme Polaska</th>
+            <th scope="col">Dolazak</th>
+            <th scope="col"></th>
+            <th scope="col">Trajanje putovanja</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="trip : ${trips}">
+            <th scope="row">3</th>
+            <th scope="col"><img class="bus-stop" src="images/bus-stop.png" alt=""></th>
+            <td th:text="${trip.departureTime}" >14:00 h</td>
+            <td th:text="${trip.arrivalTime}"  >14:30 h</td>
+            <th scope="col"><img class="money" src="images/get-money.png" alt=""></th>
+            <td>00:30 h</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>MatijaTrans j.d.o.o u stecaju @2019.</p>
+        </div>
+    </footer>
+</div>
+<script src="javascript/index.js" charset="utf-8"></script>
+</body>
+
+</html>
